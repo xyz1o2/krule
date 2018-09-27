@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>VRE决策试运行</title>
+    <link rel="stylesheet" href="/css/layui.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script language="JavaScript" src="/js/modules/jquery-3.1.1.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="/js/modules/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/modules/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/js/modules/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">VRE决策试运行</div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    <span id="user_name"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域 -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed layui-this">
+                    <a style="text-decoration:none; cursor: pointer" data-id="0">提交任务</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a id="tar1" style="text-decoration:none; cursor: pointer" data-id="1">查看结果</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div class="layui-content content1 show">
+            <div style="width: 600px;">
+                <div class="input-group">
+                    <div class="input-group-addon">知识包ID</div>
+                    <select class="form-control" id="product_line">
+
+                    </select>
+                </div>
+                <br/>
+                <div class="input-group">
+                    <div class="input-group-addon">知识包ID</div>
+                    <input type="text" class="form-control" id="package_id" placeholder="package_id">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <div class="input-group-addon">决策流ID</div>
+                    <input type="text" class="form-control" id="flow_id" placeholder="flow_id">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <div class="input-group-addon">测试件ID</div>
+                    <input type="text" class="form-control" id="serial_id" placeholder="如果填写了案件ID,即不再支持批量按照时间筛选案件">
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label style="line-height: 30px;width: 120px;left: -10px;" for="dtp_input1" class="col-md-2 control-label">案件开始时间</label>
+                    <div style="width: 300px;" class="input-group date form_datetime col-md-5" data-date="2018-01-01 00:00:00" data-date-format="yyyy-MM-dd hh:ii:ss" data-link-field="dtp_input1">
+                        <input id="start_time" class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input1" value="" /><br/>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label style="line-height: 30px;width: 120px;left: -10px;" for="dtp_input2" class="col-md-2 control-label">案件截止时间</label>
+                    <div style="width: 300px;" class="input-group date form_datetime col-md-5" data-date="2018-01-01 00:00:00" data-date-format="yyyy-MM-dd hh:ii:ss" data-link-field="dtp_input2">
+                        <input id="end_time" class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br/>
+                </div>
+                <br/>
+                <hr/>
+                <button id="add_task" type="button" class="btn btn-success">提交任务</button>
+            </div>
+        </div>
+        <div class="layui-content content2">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td>任务编号</td>
+                        <td>产品线</td>
+                        <td>知识包</td>
+                        <td>决策流</td>
+                        <td>类别</td>
+                        <td>状态</td>
+                        <td>创建时间</td>
+                        <td>获取数据</td>
+                    </tr>
+                </thead>
+                <tbody id="task_list" >
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<script src="/js/test.js" language="JavaScript"></script>
+<script src="/js/modules/bootstrap.min.js" language="JavaScript"></script>
+<script src="/js/layui.js"></script>
+<script>
+    layui.use('element', function() {
+        var element = layui.element;
+        var $ = layui.jquery;
+        //导航栏 tab 切换
+        element.on('nav(test)', function(ele){
+            var id = ele.data("id");
+            $(".layui-content").eq(id).addClass("show").siblings(".layui-content").removeClass("show");
+        });
+    });
+
+    $('.form_datetime').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 0
+    });
+
+    $.get('/username', function (result) {
+        window.document.getElementById("user_name").innerText = result;
+    });
+</script>
+</body>
+</html>

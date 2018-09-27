@@ -1,0 +1,24 @@
+.layui-layout-admin{
+
+} 
+.layui-logo{
+	background-size:100px 40px;
+	color: #f2f7f6;
+	font-size: 25px;
+}
+.layui-layout-admin .layui-header{
+
+}
+.layui-content{
+	display:none;
+}
+.show{
+	display:block;
+}
+.layui-body .layui-content{
+	padding: 15px;
+}
+
+.noframe {
+	border :0;
+}

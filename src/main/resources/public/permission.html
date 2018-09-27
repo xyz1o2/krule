@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>VRE权限配置</title>
+		<link rel="stylesheet" href="/css/layui.css">
+		<link rel="stylesheet" href="/css/index.css">
+		<script language="JavaScript" src="/js/modules/jquery-3.1.1.min.js"></script>
+	</head>
+
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo">VRE权限管理</div>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+							<span id="user_name"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll">
+					<!-- 左侧导航区域 -->
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						<li class="layui-nav-item layui-nav-itemed layui-this">
+							<a data-id="0">权限管理</a>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a data-id="1">新增权限</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="layui-body">
+				<!-- 内容主体区域 -->
+				<div class="layui-content content1 show">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>用户名</th>
+								<th>权限产品线</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="qx_panel">
+
+						</tbody>
+					</table>
+				</div>
+				<div class="layui-content content2">
+					<input style="width: 400px;height: 30px;" id="add_user_name" placeholder="用户名，邮箱前缀">
+					<br/><br/>
+					<input style="width: 400px;height: 30px;" id="add_product_line" placeholder="产品线，如果多个请用英文逗号分隔">
+					<br/><br/>
+					<button id="adduser" class="layui-btn layui-btn-normal">增加</button>
+				</div>
+			</div>
+
+		</div>
+		<script src="/js/index.js" language="JavaScript"></script>
+		<script src="/js/layui.js"></script>
+		<script>
+			layui.use('element', function() {
+				var element = layui.element;
+				var $ = layui.jquery;
+				//导航栏 tab 切换
+				element.on('nav(test)', function(ele){
+				   var id = ele.data("id");
+				   $(".layui-content").eq(id).addClass("show").siblings(".layui-content").removeClass("show");
+				});
+			});
+		</script>
+	</body>
+</html>

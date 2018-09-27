@@ -1,0 +1,71 @@
+# 自定义配置
+swagger:
+  domain: 127.0.0.1:${server.port}
+  api-ver: v1
+
+log:
+  dir: logs
+  console-level: debug
+
+profile-env: test
+
+# spring-boot config
+server:
+  address: 0.0.0.0
+  port: 8080
+
+spring:
+  datasource:
+    pdl:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1/pdl?useUnicode=true&amp;characterEncoding=utf8
+      username: root
+      password: root
+      # hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+
+    feature:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1/feature?useUnicode=true&amp;characterEncoding=utf8
+      username: root
+      password: root
+      # hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+
+    strategy:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1/strategy?useUnicode=true&amp;characterEncoding=utf8
+      username: root
+      password: root
+      # hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+
+    urule:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1/urule?useUnicode=true&amp;characterEncoding=utf8
+      username: root
+      password: root
+      # hikari:
+      minimum-idle: 2
+      maximum-pool-size: 10
+
+  freemarker:
+    suffix: .html
+    content-type: text/html
+    template-loader-path: classpath:/public/
+    charset: UTF-8
+    request-context-attribute: req
+
+urule:
+  repository:
+    #dir为空会走datasource，但不能没有该属性
+    dir: /tmp
+    databasetype: #mysql
+    datasourcename: #uruleDataSource
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

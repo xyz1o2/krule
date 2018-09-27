@@ -1,0 +1,39 @@
+# 自定义配置
+swagger:
+  domain: 127.0.0.1:${server.port}
+  api-ver: v1
+
+log:
+  dir: /usr/work/logs/prule
+  console-level: info
+
+profile-env: prod
+
+# spring-boot config
+server:
+  address: 0.0.0.0
+  port: 8080
+
+spring:
+  datasource:
+    master:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1/prule?useUnicode=true&amp;characterEncoding=utf8
+      username: root
+      password: root
+      # hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+
+    slave:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1/prule?useUnicode=true&amp;characterEncoding=utf8
+      username: root
+      password: root
+      # hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
